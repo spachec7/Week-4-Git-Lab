@@ -1,0 +1,10 @@
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.httr-oauth
+.Renviron
+.DS_Store
+Thumbs.db
+outputs/
+scratch/

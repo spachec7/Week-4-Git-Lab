@@ -1,0 +1,143 @@
+WEEK 4: GIT COMMANDS INSIDE RSTUDIO
+POLS 4130 | September 22 and 24, 2026
+
+Read Week4_Git_Workshop.md alongside this reference.
+Open Tools > Terminal > New Terminal in RStudio.
+Copy ONE relevant command at a time and press Enter.
+Replace example names, emails, paths, and URLs first.
+Do not Source this file, use R's Run button, or execute the whole file.
+
+0A. CHECK INSTALLATION
+---------------------
+git --version
+
+Expected: a Git version number.
+If missing: follow the guide's Windows or macOS installation instructions.
+Then Tools > Global Options > Git/SVN should find the installed executable.
+On Windows, RStudio's Terminal settings can select Git Bash after installation.
+On macOS only, if developer tools are missing:
+xcode-select --install
+
+0B. CONFIGURE IDENTITY ONCE PER COMPUTER
+--------------------------------------
+Replace the quoted examples with your own name and GitHub-associated email.
+The exact GitHub no-reply address from Settings > Emails is also suitable.
+
+git config --global user.name "Stephanie Pacheco"
+git config --global user.email "spachec7@lion.lmu.edu"
+git config --global init.defaultBranch main
+
+Read the effective settings:
+git config --get user.name
+git config --get user.email
+git config --get init.defaultBranch
+
+Expected: your chosen name, email, and main. No output while setting a value
+is normal. --global applies to this computer; repository settings can override
+it. Commit identity is separate from GitHub authentication.
+The guide includes an equivalent usethis option for the R Console.
+
+1A. EXISTING LOCAL FOLDER: INITIALIZE, COMMIT, THEN PUSH
+-----------------------------------------------------
+First open this intended folder as an RStudio Project:
+File > New Project > Existing Directory.
+In a NEW Terminal for this project, verify the location:
+pwd
+
+If pwd is not recognized in Windows Command Prompt, use cd with no arguments
+to display the current folder. Git Bash and macOS shells support pwd.
+The printed folder must be your practice project, not the course download,
+your home folder, or another repository. If a Terminal is in the wrong folder,
+open a new one from the intended project or use cd with your actual full path.
+
+Preferred initialization:
+Tools > Project Options > Git/SVN > Git, confirm, and restart the project.
+Alternative for a folder that is NOT already a repository (Git 2.28+):
+git init -b main
+
+Use ONE initialization method. Reopen the .Rproj after the Terminal method.
+Check the repository root and status:
+git rev-parse --show-toplevel
+git status
+
+Run the baseline R analysis, review .gitignore, then use the Git pane to stage
+only the project files and Commit: Add baseline R analysis.
+A .git folder alone does not mean a commit exists.
+Verify the commit and branch:
+git log -1 --oneline
+git branch --show-current
+
+If this newly initialized practice branch is master, rename it to main.
+Skip when the branch is already main:
+git branch -m main
+
+On GitHub, create your EMPTY css-rstudio-practice repository.
+Do not add a README, .gitignore, license, or template on GitHub for this route.
+Check whether a remote already exists:
+git remote -v
+
+If no remote is listed, add YOUR repository's HTTPS URL:
+git remote add origin https://github.com/YOUR-USERNAME/css-rstudio-practice.git
+
+Verify the URL before uploading anything:
+git remote -v
+
+Expected: origin's fetch and push URLs belong to your account and practice repo.
+If origin already exists, inspect it. Skip adding it if it is already correct.
+Ask for help before replacing an existing connection.
+
+After the local first commit and GitHub authentication are ready:
+git push -u origin main
+
+Expected: main uploads and tracks origin/main. Refresh GitHub and check the
+baseline commit and files. Return to RStudio's Git pane for normal Push/Pull.
+-u sets the tracking relationship; adding origin alone does not upload work.
+Do not force Push to repair an error. Read the guide's troubleshooting table.
+
+1B. NEW GITHUB REPOSITORY FIRST: RSTUDIO CLONE DIALOG
+-------------------------------------------------
+Alternative to 1A: create a GitHub repo WITH a README, copy Code > HTTPS,
+then File > New Project > Version Control > Git. Paste your URL and choose a
+local parent folder. Copy starter-project contents into the clone, including
+.gitignore, keep its .Rproj, and follow the baseline analysis/commit steps.
+A clone already has Git history and origin; do not run git init or add origin.
+
+1C. FORK AN EXISTING REPOSITORY, THEN CLONE YOUR FORK
+---------------------------------------------------
+Open in a browser:
+https://github.com/ShuyuanShen/quarto-academic-website-template
+
+Click Fork, choose your own account as Owner, and Create fork.
+On YOUR fork, copy Code > HTTPS. Clone using RStudio's New Project >
+Version Control > Git dialog. Use a separate folder from the R analysis.
+
+Alternative to the dialog: in a Terminal in your chosen PARENT folder,
+replace YOUR-FORK-URL with the full HTTPS URL, then run:
+git clone YOUR-FORK-URL
+
+Open the .Rproj inside the new clone. If a repository has none, use
+File > New Project > Existing Directory in the cloned folder.
+Use ONE clone method. Do not initialize a new Git repository inside the clone.
+
+In the website project's RStudio Terminal, verify:
+git remote -v
+git branch --show-current
+git status
+
+Expected: origin names YOUR fork, the branch is main, and the files are local.
+Edit the first heading of README.md, Save, Diff, stage, Commit, and Push using
+the Git pane. Refresh YOUR fork to verify the commit. This does not alter the
+instructor's repository or publish a live website. Return to the analysis
+project's .Rproj before continuing the visualization lab.
+
+AUTHENTICATION (R CONSOLE, NOT TERMINAL)
+--------------------------------------
+Use a working credential manager's browser sign-in when prompted.
+If a token is needed, follow the guide's selected-repository permission steps.
+Install gitcreds using Packages > Install, then in the R CONSOLE run:
+gitcreds::gitcreds_set()
+
+Enter the token only at its interactive prompt, never into a code file.
+A normal GitHub password does not authenticate HTTPS Git pushes.
+
+Sources and screenshot credits: Week4_Git_Workshop.md.

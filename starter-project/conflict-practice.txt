@@ -1,0 +1,9 @@
+TEXT SIMULATION ONLY. These markers were typed for practice.
+Git has not reported an unresolved merge. Do not run this file as R.
+
+The accepted research question uses 1997. Decide the intended line below.
+<<<<<<< HEAD
+analysis_year <- 1997
+=======
+analysis_year <- 2002
+>>>>>>> other-branch
