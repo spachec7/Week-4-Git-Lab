@@ -1,4 +1,4 @@
-# Week 4: version control and collaboration in RStudio
+# Week 4: version control and collaboration in RStudio and Github
 
 POLS 4130 · September 22 and 24, 2026
 
